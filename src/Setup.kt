@@ -53,13 +53,29 @@ fun main(args: Array<String>) {
                     return input.size
                 }
 
-                val sampleInput = readInput("${dayName}_Test")
-                check(part1(sampleInput) == 1)
-                check(part2(sampleInput) == 1)
-
-                val input = readInput("$dayName")
-                part1(input).println()
-                part2(input).println()
+                // Test Input
+                val testInput = readInput("${dayName}_test")
+                val part1Test = measureTimeMillis({ time, result -> println("Part1 Test (${'$'}time ms): ${'$'}result") }) {
+                    part1(testInput)
+                }
+                check(part1Test == 1)
+            
+                val part2Test = measureTimeMillis({ time, result -> println("Part2 Test (${'$'}time ms): ${'$'}result") }) {
+                    part2(testInput)
+                }
+                check(part2Test == 1)
+            
+                // User Input
+                val input = readInput("${dayName}")
+                val part1 = measureTimeMillis({ time, result -> println("Part1 (${'$'}time ms): ${'$'}result") }) {
+                    part1(input)
+                }
+                check(part1 == 1)
+            
+                val part2 = measureTimeMillis({ time, result -> println("Part2 (${'$'}time ms): ${'$'}result") }) {
+                    part2(input)
+                }
+                check(part2 == 1)
             }
         """.trimIndent() + System.lineSeparator()
         Files.writeString(ktPath, template)
